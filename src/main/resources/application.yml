@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/DataInCloudMig
+    url: jdbc:postgresql://host.docker.internal:5432/DataInCloudMig
     username: postgres
     password: password
 
