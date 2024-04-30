@@ -38,23 +38,25 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public Car getById(@PathVariable String id) {
-        return null;
+    public CarResponseDto getById(@PathVariable String id) {
+        return carMapper.toResponseDto(carService.getById(Integer.parseInt(id)));
     }
 
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
-        return false;
+        return carService.delete(id);
     }
 
     @PostMapping()
-    public Car postCar(@Valid @RequestBody CarRequestDto carRequestDto) {
-        return null;
+    public CarResponseDto postCar(@Valid @RequestBody CarRequestDto carRequestDto) {
+        Car car = carMapper.toModel(carRequestDto);
+        return carMapper.toResponseDto(carService.create(car));
     }
 
     @PatchMapping("/{id}")
-    public Car delete(@Valid @RequestBody Car car, @PathVariable int id) {
-        return null;
+    public CarResponseDto delete(@Valid @RequestBody CarRequestDto carRequestDto, @PathVariable int id) {
+        Car car = carMapper.toModel(carRequestDto);
+        return carMapper.toResponseDto(carService.update(car, id));
     }
 
 }
