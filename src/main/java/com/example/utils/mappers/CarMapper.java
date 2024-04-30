@@ -1,8 +1,8 @@
-package org.example.utils.mappers;
+package com.example.utils.mappers;
 
-import org.example.dtos.CarRequestDto;
-import org.example.dtos.CarResponseDto;
-import org.example.models.Car;
+import com.example.dtos.CarRequestDto;
+import com.example.dtos.CarResponseDto;
+import com.example.models.Car;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

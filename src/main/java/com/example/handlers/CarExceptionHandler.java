@@ -1,4 +1,4 @@
-package org.example.handlers;
+package com.example.handlers;
 
 import java.util.HashMap;
 import java.util.Map;

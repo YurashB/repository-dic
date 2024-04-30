@@ -1,15 +1,9 @@
-package org.example.controllers;
+package com.example.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.example.dtos.CarRequestDto;
-import org.example.dtos.CarResponseDto;
-import org.example.models.Car;
-import org.example.services.CarService;
-import org.example.utils.mappers.CarMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,26 +14,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dtos.CarRequestDto;
+import com.example.dtos.CarResponseDto;
+import com.example.services.CarService;
+
 @RestController()
 @RequestMapping(value = "/api/cars", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CarController {
 
     private final CarService carService;
-    private final CarMapper carMapper;
 
-    public CarController(CarService carService, CarMapper carMapper) {
+    public CarController(CarService carService) {
         this.carService = carService;
-        this.carMapper = carMapper;
     }
 
     @GetMapping()
     public List<CarResponseDto> getAll() {
-        return carService.getAll().stream().map(carMapper::toResponseDto).collect(Collectors.toList());
+        return carService.getAll();
     }
 
     @GetMapping("/{id}")
     public CarResponseDto getById(@PathVariable String id) {
-        return carMapper.toResponseDto(carService.getById(Integer.parseInt(id)));
+        return carService.getById(Integer.parseInt(id));
     }
 
     @DeleteMapping("/{id}")
@@ -49,14 +45,12 @@ public class CarController {
 
     @PostMapping()
     public CarResponseDto postCar(@Valid @RequestBody CarRequestDto carRequestDto) {
-        Car car = carMapper.toModel(carRequestDto);
-        return carMapper.toResponseDto(carService.create(car));
+        return carService.create(carRequestDto);
     }
 
     @PatchMapping("/{id}")
     public CarResponseDto delete(@Valid @RequestBody CarRequestDto carRequestDto, @PathVariable int id) {
-        Car car = carMapper.toModel(carRequestDto);
-        return carMapper.toResponseDto(carService.update(car, id));
+        return carService.update(carRequestDto, id);
     }
 
 }

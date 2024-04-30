@@ -1,6 +1,6 @@
-package org.example.repositories;
+package com.example.repositories;
 
-import org.example.models.Car;
+import com.example.models.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
