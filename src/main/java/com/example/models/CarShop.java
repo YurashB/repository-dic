@@ -14,7 +14,7 @@ public class CarShop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @NotBlank(message = "Name of car shop is required")
     private String name;
@@ -29,11 +29,11 @@ public class CarShop {
     public CarShop() {
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
